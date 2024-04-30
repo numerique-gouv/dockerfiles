@@ -1,5 +1,6 @@
 FROM golang:1.22.2
 
+ENV VERSION v0.24.0
 
 RUN apt update ;\
   apt install -y git fuse ;\
@@ -8,7 +9,7 @@ RUN apt update ;\
   go get github.com/kahing/goofys ;\
   go install github.com/kahing/goofys ;\
   curl -sSL -o /usr/local/bin/catfs \
-  https://github.com/kahing/catfs/releases/download/v0.8.0/catfs ;\
+  https://github.com/kahing/catfs/releases/download/v0.9.0/catfs ;\
   chmod +x /usr/local/bin/catfs
 
 ARG ENDPOINT
