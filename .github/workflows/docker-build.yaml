@@ -43,7 +43,7 @@ jobs:
         with:
           images: ${{ matrix.image }}
           tags: |
-            type=pep440,pattern={{version}},value=${{ env.VERSION }}
+            type=raw,value=${{ env.VERSION }}
       -
         name: Load sops secrets
         uses: rouja/actions-sops@main
