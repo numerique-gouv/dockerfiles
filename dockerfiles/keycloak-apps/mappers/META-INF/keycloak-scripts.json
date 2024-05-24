@@ -1,0 +1,8 @@
+{
+    "mappers": [
+      {
+          "name": "Matrix localpart",
+          "fileName": "matrix-localpart.js",
+          "description": "Creates a custom matrix localpart"
+      }
+  ]  }

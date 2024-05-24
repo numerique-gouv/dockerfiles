@@ -25,6 +25,10 @@ jobs:
             image: lasuite/goofys
             path: dockerfiles/goofys
             cmd_version: "echo \"VERSION=$( awk '/VERSION/  {print substr($3, 2)}' dockerfiles/goofys/Dockerfile)\" >> $GITHUB_ENV"
+          - dockerfile: dockerfiles/keycloak-apps/Dockerfile
+            image: lasuite/keycloak-apps
+            path: dockerfiles/keycloak-apps
+            cmd_version: "cat dockerfiles/keycloak-apps/Dockerfile | head -n1 | cut -d' ' -f2 >> $GITHUB_ENV"
     steps:
       -
         name: Checkout
