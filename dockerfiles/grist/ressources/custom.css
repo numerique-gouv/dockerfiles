@@ -1,0 +1,59 @@
+@import url("@gouvfr-lasuite/integration/dist/css/gaufre.css");
+
+:root {
+  /* logo */
+  --icon-GristLogo: url("ui-icons/Logo/marianne-48x48.png") !important;
+  --grist-logo-bg: #ffffff !important;
+  --grist-logo-size: 22px 22px !important;
+
+  /* colors */
+  --grist-color-light-grey: #f6f6f6 !important;
+  --grist-color-medium-grey: #dddddd99 !important;
+  --grist-color-medium-grey-opaque: #e5e5e5 !important;
+  --grist-color-dark-grey: #dddddd !important;
+  --grist-color-light: #ffffff !important;
+  --grist-color-dark: #2f2f2f !important;
+  --grist-color-dark-bg: #2f2f2f !important;
+  --grist-color-slate: #929292 !important;
+  --grist-color-light-green: #000091 !important;
+  --grist-color-dark-green: #2323ff !important;
+  --grist-color-darker-green: #2323ff !important;
+  --grist-color-lighter-green: #cacafb !important;
+  --grist-color-lighter-blue: #0078f3 !important;
+  --grist-color-light-blue: #0063cb !important;
+  --grist-color-cursor: #000091 !important;
+  --grist-color-selection: #ececfe !important;
+  --grist-color-selection-opaque: #ececfe !important;
+  --grist-color-selection-darker-opaque: #e3e3fd !important;
+  --grist-color-inactive-cursor: #cacafb !important;
+  --grist-color-hover: #cecece !important;
+  --grist-color-error: #d64d00 !important;
+  --grist-color-warning: #fea941 !important;
+  --grist-color-warning-bg: #dd962c !important;
+  --grist-color-backdrop: #3a3a3a !important;
+  --grist-label-text-bg: #ffffff !important;
+  --grist-label-active-bg: #f0f0f0 !important;
+  --grist-primary-fg: #000091 !important;
+  --grist-primary-fg-hover: #2323ff !important;
+  --grist-primary-bg: #ffffff !important;
+  --grist-control-bg: #ffffff !important;
+  --grist-control-fg: #000091 !important;
+  --grist-primary-fg-hover: #2323ff !important;
+  --grist-control-border: 1px solid #2323ff !important;
+  --grist-toast-bg: #040404 !important;
+  
+  /* Custom inputs colors*/
+  --grist-actual-cell-color: #6e6ef2 !important;
+  --accent-color: #6e6ef2 !important;
+}
+
+.test-rule-permissions [class*=deny] {
+  background-color: #ff0000;
+	background-image: linear-gradient(-45deg, #ff0000 14px, white 15px 16px, #ff0000 16px);
+  border-color: #ff0000;
+}
+
+.test-rule-permissions [class*=allow] {
+  background-color: #16b378;
+  border-color: #16b378;
+}
