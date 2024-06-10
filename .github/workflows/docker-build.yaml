@@ -63,7 +63,7 @@ jobs:
         name: Load sops secrets
         uses: rouja/actions-sops@main
         with:
-          secret-file: .github/workflows/secrets/numerique-gouv/dockerfiles/secrets.enc.env
+          secret-file: secrets/numerique-gouv/dockerfiles/secrets.enc.env
           age-key: ${{ secrets.SOPS_PRIVATE }}
       -
         name: Login to DockerHub
