@@ -22,7 +22,7 @@
   --grist-color-lighter-blue: #0078f3 !important;
   --grist-color-light-blue: #0063cb !important;
   --grist-color-cursor: #000091 !important;
-  --grist-color-selection: #ececfe !important;
+  --grist-color-selection: rgba(128,128,254,0.15) !important;
   --grist-color-selection-opaque: #ececfe !important;
   --grist-color-selection-darker-opaque: #e3e3fd !important;
   --grist-color-inactive-cursor: #cacafb !important;
