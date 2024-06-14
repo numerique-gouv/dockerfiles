@@ -27,7 +27,7 @@ jobs:
           app-id: ${{ secrets.APP_ID }}
           private-key: ${{ secrets.PRIVATE_KEY }}
           owner: ${{ github.repository_owner }}
-          repositories: "impress,secrets"
+          repositories: "dockerfiles,secrets"
       -
         name: Checkout repository
         uses: actions/checkout@v2
@@ -35,14 +35,6 @@ jobs:
           submodules: recursive
           token: ${{ steps.app-token.outputs.token }}
           ref: ${{ github.event.inputs.commitSha }}
-      -
-        name: Docker meta
-        id: meta
-        uses: docker/metadata-action@v5
-        with:
-          images: lasuite/grist
-          tags: |
-            type=raw,value=${{ github.event.inputs.dinumTag }}
       -
         name: Load sops secrets
         uses: rouja/actions-sops@main
@@ -55,11 +47,8 @@ jobs:
         run: echo "$DOCKER_HUB_PASSWORD" | docker login -u "$DOCKER_HUB_USER" --password-stdin
       -
         name: Build and push
-        uses: docker/build-push-action@v5
-        with:
-          context: ${{ matrix.path }}
-          file: ${{ matrix.dockerfile }}
-          push: true
-          build-args: GRIST_VERSION=${{ github.event.inputs.gristVersion }}
-          tags: ${{ steps.meta.outputs.tags }}
-          labels: {{ steps.meta.outputs.labels }}
+        run: |
+          cd dockerfiles/grist;
+          docker build --build-arg "GRIST_VERSION=${{ github.event.inputs.gristVersion }}" \
+          --annotation "commitSha=${{ github.event.inputs.commitSha }}" \
+          --push . -t lasuite/grist:${{ github.event.inputs.dinumTag }};
