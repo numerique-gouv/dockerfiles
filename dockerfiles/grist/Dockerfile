@@ -19,7 +19,8 @@ RUN apt-get update &&\
   apt-get remove --purge -y wget
 
 COPY ressources/* /grist/static/
-RUN mv /grist/static/marianne-48x48.png /grist/static/ui-icons/Logo/
+RUN mv /grist/static/GristGouvLogo.svg /grist/static/ui-icons/Logo/ &&\
+  mv  /grist/static/favicon.png /grist/static/icons/favicon.png
 
 # Variable to force grist to use custom.css and dinum-custom.js
 ENV APP_STATIC_INCLUDE_CUSTOM_CSS true
