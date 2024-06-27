@@ -2,7 +2,7 @@
 
 :root {
   /* logo */
-  --icon-GristLogo: url("ui-icons/Logo/marianne-48x48.png") !important;
+  --icon-GristLogo: url("ui-icons/Logo/GristGouvLogo.svg") !important;
   --grist-logo-bg: #ffffff !important;
   --grist-logo-size: 22px 22px !important;
 
