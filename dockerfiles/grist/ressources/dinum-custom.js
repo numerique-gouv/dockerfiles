@@ -133,10 +133,13 @@
 
 window.addEventListener('load', async (event) => {
   await waitForElm('body.interface-full');
-  // gristApp.topAppModel.appObs is not populated at that point, listen for the observer to their first change
-  
+  const appObs = gristApp.topAppModel && gristApp.topAppModel.appObs;
+  if (!appObs) {
+    return;
+  }
+  // appObs is not populated at that point, listen for the observer to their first change
   let listener; 
-  listener = gristApp.topAppModel.appObs.addListener( async (appObs) => {
+  listener = appObs.addListener( async (appObs) => {
     // Gauffre must be displayed only in home pages
     if (appObs.pageType.get() !== "home"){
       return 1;
