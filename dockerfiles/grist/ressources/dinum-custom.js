@@ -129,8 +129,6 @@
 // ========================
 // START gauffre
 // ========================
-
-
 window.addEventListener('load', async (event) => {
   await waitForElm('body.interface-full');
   const appObs = gristApp.topAppModel && gristApp.topAppModel.appObs;
@@ -170,6 +168,12 @@ window.addEventListener('load', async (event) => {
     gauffreScript.src = "https://integration.lasuite.numerique.gouv.fr/api/v1/gaufre.js";
     document.head.insertBefore(gauffreScript, document.head.lastChild);
     
+    // Create beta-tag
+    const betaTag = document.createElement('p');
+    betaTag.className = "beta-tag";
+    betaTag.innerText = "beta";
+    gauffreDiv.after(betaTag);
+
     // Should be disposed so we only listen for changes once, but failed to achieve doing that.
     // listener.dispose();
   });
