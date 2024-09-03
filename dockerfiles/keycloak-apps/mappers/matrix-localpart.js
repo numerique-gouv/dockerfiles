@@ -78,4 +78,4 @@ function convertBase(str, fromBase, toBase) {
 // convert it to base36
 // 28nosjs1wcj64
 
-exports = convertBase(uuid.replace(/-/gi, '').slice(-16), 16, 36);
+exports = convertBase(user.getFirstAttribute("sub").replace(/-/gi, '').slice(-16), 16, 36);
