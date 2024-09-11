@@ -1,9 +1,9 @@
-ARG GRIST_VERSION=1.1.16
+ARG GRIST_VERSION=1.1.18
 
 FROM gristlabs/grist:$GRIST_VERSION
 
 ARG LASUITE_VERSION=1.0.2
-ARG LASUITE_ARCHIVE=gouvfr-lasuite-integration-$LASUITE_VERSION.tgz 
+ARG LASUITE_ARCHIVE=gouvfr-lasuite-integration-$LASUITE_VERSION.tgz
 
 RUN apt-get update &&\
   apt-get install -y wget &&\
