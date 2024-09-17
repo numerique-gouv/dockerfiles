@@ -136,7 +136,7 @@ window.addEventListener('load', async (event) => {
     return;
   }
   // appObs is not populated at that point, listen for the observer to their first change
-  let listener; 
+  let listener;
   listener = appObs.addListener( async (appObs) => {
     // Gauffre must be displayed only in home pages
     if (appObs.pageType.get() !== "home"){
@@ -144,7 +144,7 @@ window.addEventListener('load', async (event) => {
     }
     // We wait for header bar to be available in DOM to insert Gauffre in it
     await waitForElm('.test-top-header');
-    
+
     // Create gauffre button Tag
     const gristBar = document.getElementsByClassName('test-top-header')[0];
     const gauffreDiv = document.createElement('div');
@@ -167,12 +167,18 @@ window.addEventListener('load', async (event) => {
     gauffreScript.setAttribute('defer', true);
     gauffreScript.src = "https://integration.lasuite.numerique.gouv.fr/api/v1/gaufre.js";
     document.head.insertBefore(gauffreScript, document.head.lastChild);
-    
+
+    // Create DSFR Title
+    const appTitle = document.createElement('p');
+    appTitle.classList.add("fr-header__service-title", "lasuite-header__service-title");
+    appTitle.innerText = "Tableur collaboratif (Grist)";
+    gristBar.insertBefore(appTitle, gristBar.firstChild);
+
     // Create beta-tag
     const betaTag = document.createElement('p');
     betaTag.className = "beta-tag";
     betaTag.innerText = "beta";
-    gauffreDiv.after(betaTag);
+    appTitle.after(betaTag);
 
     // Should be disposed so we only listen for changes once, but failed to achieve doing that.
     // listener.dispose();

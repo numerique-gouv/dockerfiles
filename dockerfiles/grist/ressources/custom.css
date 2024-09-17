@@ -41,7 +41,7 @@
   --grist-primary-fg-hover: #2323ff !important;
   --grist-control-border: 1px solid #2323ff !important;
   --grist-toast-bg: #040404 !important;
-  
+
   /* Custom inputs tags colors*/
   --grist-actual-cell-color: #6e6ef2 !important;
   --accent-color: #6e6ef2 !important;
@@ -97,8 +97,23 @@
 }
 /* END Custom toast notification Colors */
 
+/* START APP Title */
+.fr-header__service-title {
+	font-size: 1.125rem;
+	font-weight: 700;
+	line-height: 1.75rem;
+	color: var(--grist-primary-fg);
+	margin: 0 0 0 .5rem;
+}
+.lasuite-header__service-title {
+	display: block;
+	font-size: 1.75rem;
+	margin-left: 1rem;
+}
+/* END APP Title */
+
 /* START beta-tag */
-/* Copied from pad.numerqieu.fr generated cover.css*/
+/* Copied from pad.numerique.fr generated cover.css*/
 .beta-tag {
   font-weight: bold;
   text-transform: uppercase;
