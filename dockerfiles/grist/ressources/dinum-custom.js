@@ -8,12 +8,13 @@
     selectedTz: 'CEST',
 
     // Date du début de la maintenance
-    startDateWithoutTimezone: '2024-04-10T13:00:00',
+    startDateWithoutTimezone: '2024-09-18T12:30:00',
 
     // Durée de la maitenance prévue (en minutes).
-    // ASTUCE: Si la maintenance dure moins longtemps que prévu, réduire a postériori la valeur de cette variable de sorte à ce qu'elle n'apparaisse plus.
+    // ASTUCE: Si la maintenance dure moins longtemps que prévu,
+    // réduire a postériori la valeur de cette variable de sorte à ce qu'elle n'apparaisse plus.
     // Pas besoin de committer ensuite le changement dans le repo.
-    maintainanceDurationMinutes: 60,
+    maintainanceDurationMinutes: 10080, // 10080 = One week
   };
   // FIN CONFIGURER
 
@@ -41,11 +42,25 @@
     });
 
     dialog.innerHTML = `
+        <h1>
+          <a href="https://grist.incubateur.net">grist.incubateur.net</a> devient
+          <a href="https://grist.numerique.gouv.fr">grist.numerique.gouv.fr</a>
+        </h1>
         <p>
-        Une maintenance de Grist est prévue le ${dateFormatter.format(maintainanceStartDate)} heure de Paris
-          jusqu'à ${timeFormatter.format(maintainanceEndDate)}, période durant laquelle le service sera momentanément indisponible. <br>
-        Pour toute remarque ou question, merci de nous contacter via <a href="mailto:donnees@anct.gouv.fr">donnees@anct.gouv.fr</a></p>
-        <p>Merci de votre compréhension</p>
+          Dans le cadre de son intégration à <a href="https://lasuite.numerique.gouv.fr">La Suite Numérique</a>,
+          nous avons modifié le nom de domaine de l'instance inter-ministérielle de l'outil.
+        </p>
+        <p>
+          Aucune action n'est requise de la part des utilisateurs.
+          Les liens et formulaires pré-existants continuent de fonctionner.
+        </p>
+        <p>
+          <strong>
+            &#9888; Cependant, les intégrations API risquent de casser.
+            Vous devez mettre à jour l'URL appelée dans vos applications connectées à Grist via API.
+          </strong>
+        </p>
+        <br>
         <form method="dialog">
           <p>
             <input type="checkbox" id="jaiCompris">
@@ -138,7 +153,7 @@ window.addEventListener('load', async (event) => {
     return;
   }
   // appObs is not populated at that point, listen for the observer to their first change
-  let listener; 
+  let listener;
   listener = appObs.addListener( async (appObs) => {
     // Gauffre must be displayed only in home pages
     if (appObs.pageType.get() !== "home"){
@@ -146,7 +161,7 @@ window.addEventListener('load', async (event) => {
     }
     // We wait for header bar to be available in DOM to insert Gauffre in it
     await waitForElm('.test-top-header');
-    
+
     // Create gauffre button Tag
     const gristBar = document.getElementsByClassName('test-top-header')[0];
     const gauffreDiv = document.createElement('div');
@@ -169,7 +184,7 @@ window.addEventListener('load', async (event) => {
     gauffreScript.setAttribute('defer', true);
     gauffreScript.src = "https://integration.lasuite.numerique.gouv.fr/api/v1/gaufre.js";
     document.head.insertBefore(gauffreScript, document.head.lastChild);
-    
+
     // Should be disposed so we only listen for changes once, but failed to achieve doing that.
     // listener.dispose();
   });
