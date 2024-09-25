@@ -1,4 +1,4 @@
-ARG VERSION=24.0.4-debian-12-r1
+ARG VERSION=25.0.6-debian-12-r0
 
 FROM openjdk:15 as builded-jars
 COPY . /code
