@@ -1,6 +1,6 @@
 ARG GRIST_VERSION=1.1.18
 
-FROM gristlabs/grist:$GRIST_VERSION
+FROM gristlabs/grist-oss:$GRIST_VERSION
 
 ARG LASUITE_VERSION=1.0.2
 ARG LASUITE_ARCHIVE=gouvfr-lasuite-integration-$LASUITE_VERSION.tgz
