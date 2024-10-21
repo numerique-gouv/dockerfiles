@@ -41,10 +41,14 @@
   --grist-primary-fg-hover: #2323ff !important;
   --grist-control-border: 1px solid #2323ff !important;
   --grist-toast-bg: #040404 !important;
-  
+
   /* Custom inputs tags colors*/
   --grist-actual-cell-color: #6e6ef2 !important;
   --accent-color: #6e6ef2 !important;
+
+  /* FIXME Remove when abstracted in grist code*/
+  --grist-theme-announcement-popup-fg: #000091 !important;
+  --grist-theme-announcement-popup-bg: #e3e3fd !important;
 }
 
 /* START Custom ACL colors */
@@ -93,6 +97,21 @@
 
 /* START Custom toast notification Colors */
 .test-notifier-toast-custom-action {
-  color:#cacafb !important;;
+  color:#cacafb !important;
 }
 /* END Custom toast notification Colors */
+
+/* START Custom home page images hue */
+/* Home page svgs*/
+[src*="webinars.svg"],
+[src*="help-center.svg"],
+.test-dm-pinned-initials + div{
+  filter: hue-rotate(93deg) saturate(20);
+}
+/* END Custom home page images hue */
+
+/* START new logo beta */
+.test-dm-logo {
+  background-size: unset !important;
+}
+/* END new logo beta */
