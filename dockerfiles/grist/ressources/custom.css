@@ -112,13 +112,6 @@
 
 /* START logo beta at user PP position*/
 .test-dm-logo {
-  background-size: 100% !important;
+  background-size: unset !important;
 }
 /* END logo beta at user PP position*/
-
-/* START logo beta at grist ressources position */
-[style^="background-image: var(--icon-GristLogo)"] {
-  width: 48px !important;
-  height: 48px !important;
-}
-/* END logo beta at grist ressources position */
