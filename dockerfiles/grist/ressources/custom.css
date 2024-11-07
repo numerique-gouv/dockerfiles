@@ -110,8 +110,15 @@
 }
 /* END Custom home page images hue */
 
-/* START new logo beta */
+/* START logo beta at user PP position*/
 .test-dm-logo {
-  background-size: unset !important;
+  background-size: 100% !important;
 }
-/* END new logo beta */
+/* END logo beta at user PP position*/
+
+/* START logo beta at grist ressources position */
+[style^="background-image: var(--icon-GristLogo)"] {
+  width: 48px !important;
+  height: 48px !important;
+}
+/* END logo beta at grist ressources position */
