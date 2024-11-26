@@ -6,8 +6,15 @@ on:
       gristVersion:
         description: 'Grist base image'
         required: true
-      dinumTag:
-        description: 'DINUM docker image tag'
+      imageTag:
+        description: 'lasuite/grist docker image tag'
+        required: true
+      imageVersion:
+        description: 'choice between DINUM or ANCT image'
+        type: choice
+        options:
+        - DINUM
+        - ANCT
         required: true
       commitSha:
         description: 'Git commit sha to build the image'
@@ -48,7 +55,8 @@ jobs:
       -
         name: Build and push
         run: |
+          BUILD_ENV=${{ github.event.inputs.imageVersion }};
           cd dockerfiles/grist;
           docker build --build-arg "GRIST_VERSION=${{ github.event.inputs.gristVersion }}" \
           --annotation "commitSha=${{ github.event.inputs.commitSha }}" \
-          --push . -t lasuite/grist:${{ github.event.inputs.dinumTag }};
+          --push . -t lasuite/grist:${{ github.event.inputs.imageTag }}-${{ github.events.inputs.imageVersion }};
