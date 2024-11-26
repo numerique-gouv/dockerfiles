@@ -59,4 +59,4 @@ jobs:
           docker build --build-arg "GRIST_VERSION=${{ github.event.inputs.gristVersion }}" \
           --build-arg "BUILD_ENV=${{ github.event.inputs.imageVersion }}" \
           --annotation "commitSha=${{ github.event.inputs.commitSha }}" \
-          --push . -t lasuite/grist:${{ github.event.inputs.imageTag }}-${{ github.events.inputs.imageVersion }};
+          --push . -t lasuite/grist:${{ github.event.inputs.imageTag }}-${{ github.event.inputs.imageVersion }};
