@@ -5,15 +5,15 @@
   // CONFIGURER ICI
   const config = {
     // CEST = heure d'été (+0200), CET = heure d'hiver ().
-    selectedTz: 'CEST',
+    selectedTz: 'CET',
 
     // Date du début de la maintenance
-    startDateWithoutTimezone: '2024-04-10T13:00:00',
+    startDateWithoutTimezone: '2024-11-27T17:00:00',
 
     // Durée de la maitenance prévue (en minutes).
     // ASTUCE: Si la maintenance dure moins longtemps que prévu, réduire a postériori la valeur de cette variable de sorte à ce qu'elle n'apparaisse plus.
     // Pas besoin de committer ensuite le changement dans le repo.
-    maintainanceDurationMinutes: 60,
+    maintainanceDurationMinutes: 180,
   };
   // FIN CONFIGURER
 
@@ -80,45 +80,6 @@
     a.target = "_blank";
     a.rel = 'nofollow';
     return a;
-  }
-
-  function showAgreementDialog() {
-    const { termsOfServiceUrl } = window.gristConfig;
-    if (!termsOfServiceUrl) {
-      return;
-    }
-
-    const dialog = document.createElement('dialog');
-    dialog.id = 'agreementPopin';
-    const cguLinkHtml = makeLink("les conditions d'utilisation", termsOfServiceUrl).outerHTML;
-    dialog.innerHTML = `
-      <p>
-        Veuillez accepter ${cguLinkHtml} de Grist avant de continuer.
-      </p>
-      <p>
-        Vous pourrez les retrouvez à tout moment via le lien en bas<br>
-        à gauche de la page d'accueil de Grist.
-      </p>
-      <form method="dialog">
-        <p>
-          <input type="checkbox" id="jaccepte">
-          <label for="jaccepte">J'ai lu et j'accepte sans réserve ${cguLinkHtml}</label>
-        </p>
-        <button disabled id="fermerPopinAgreement">Poursuivre sur Grist</button>
-      </form>
-    `;
-    document.body.appendChild(dialog);
-    document.getElementById('fermerPopinAgreement').onclick = function onMessageUnderstood() {
-      localStorage.gcuAgreementDate = new Date().toISOString();
-    }
-    document.getElementById('jaccepte').onchange = function (ev) {
-      document.getElementById('fermerPopinAgreement').disabled = !ev.target.checked;
-    }
-    dialog.showModal();
-  }
-
-  if (!localStorage.gcuAgreementDate) {
-    window.addEventListener('load', showAgreementDialog);
   }
 })();
 
