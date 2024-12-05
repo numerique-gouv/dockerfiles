@@ -6,7 +6,7 @@ ARG LASUITE_VERSION=1.0.2
 ARG LASUITE_ARCHIVE=gouvfr-lasuite-integration-$LASUITE_VERSION.tgz
 ARG BUILD_ENV=DINUM
 
-# La suite's gauffre is expected only in DINUM inmage
+# La suite's gauffre is expected only in DINUM image
 RUN if [ "$BUILD_ENV" == "DINUM" ]; then \
     apt-get update &&\
     apt-get install -y wget &&\
@@ -22,13 +22,8 @@ RUN if [ "$BUILD_ENV" == "DINUM" ]; then \
     apt-get remove --purge -y wget;\
   fi
 
-COPY ressources/$BUILD_ENV/* /grist/static/
-# Favicon is not updated in ANCT context
-RUN mv /grist/static/logo.svg /grist/static/ui-icons/Logo/ &&\
-  if [ -f /grist/static/favicon.png ]; then\
-    mv /grist/static/favicon.png /grist/static/icons/favicon.png;\
-  fi
+COPY ressources/$BUILD_ENV/ /grist/static/
 
-# Variable to force grist to use custom.css and dinum-custom.js
+# Variable to force grist to use custom.css and custom.js
 ENV APP_STATIC_INCLUDE_CUSTOM_CSS true
 ENV GRIST_INCLUDE_CUSTOM_SCRIPT_URL /v/unknown/custom.js
