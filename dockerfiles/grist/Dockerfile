@@ -7,7 +7,7 @@ ARG LASUITE_ARCHIVE=gouvfr-lasuite-integration-$LASUITE_VERSION.tgz
 ARG BUILD_ENV=DINUM
 
 # La suite's gauffre is expected only in DINUM image
-RUN if [ "$BUILD_ENV" == "DINUM" ]; then \
+RUN if [ "$BUILD_ENV" = "DINUM" ]; then \
     apt-get update &&\
     apt-get install -y wget &&\
     cd /grist/static &&\
