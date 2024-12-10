@@ -1,4 +1,4 @@
-ARG GRIST_VERSION=v1.3.1
+ARG GRIST_VERSION=1.3.1
 
 FROM gristlabs/grist-oss:$GRIST_VERSION
 
