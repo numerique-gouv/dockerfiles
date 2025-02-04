@@ -122,3 +122,16 @@
   height: 48px !important;
 }
 /* END logo beta at grist ressources position */
+
+/* START patch 1.3.3 */
+.glyphicon.glyphicon-paperclip::before {
+	display: block;
+	background-color: var(--grist-control-bg, --grist-theme-text, black);
+	content: ' ';
+	mask-image: var(--icon-FieldAttachment);
+	width: 14px;
+	height: 14px;
+	mask-size: contain;
+	mask-repeat: no-repeat;
+}
+/* END patch 1.3.3 */
