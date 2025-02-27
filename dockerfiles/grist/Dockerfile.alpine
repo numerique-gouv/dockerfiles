@@ -36,21 +36,13 @@ COPY buildtools /grist/buildtools
 # Copy locales files early. During build process they are validated.
 COPY static/locales /grist/static/locales
 
-# Add bash needed by build:prod and make needed by optional pyodide
+# Add bash needed by build:prod
 RUN \
   apk update && \
-  apk --no-cache add bash=5.2.37-r0 make=4.4.1-r2 && \
+  apk --no-cache add bash=5.2.37-r0 && \
   yarn run build:prod && \
 # We don't need them anymore, they will by copied to the final image.
   rm -rf /grist/static/locales
-
-
-# Prepare material for optional pyodide sandbox
-COPY sandbox/pyodide /grist/sandbox/pyodide
-COPY sandbox/requirements3.txt /grist/sandbox/requirements3.txt
-RUN \
-  cd /grist/sandbox/pyodide && \
-  make setup
 
 ################################################################################
 ## Python collection stage
@@ -123,9 +115,6 @@ COPY bower_components /grist/bower_components
 COPY sandbox /grist/sandbox
 COPY plugins /grist/plugins
 COPY static /grist/static
-
-# Make optional pyodide sandbox available
-COPY --from=builder /grist/sandbox/pyodide /grist/sandbox/pyodide
 
 # Finalize static directory
 RUN \
