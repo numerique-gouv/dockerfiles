@@ -1,3 +1,5 @@
+ARG GRIST_VERSION=v1.4.2
+
 ################################################################################
 ## The Grist source can be extended. This is a stub that can be overridden
 ## from command line, as:
@@ -7,6 +9,17 @@
 FROM scratch AS ext
 
 ################################################################################
+# Get sources from git stage
+################################################################################
+FROM alpine/git:v2.47.2 AS sources
+
+ARG GRIST_VERSION
+
+# Clone grist from GRIST_VERSION tag
+WORKDIR /grist-core
+RUN git clone --depth 1 -b $GRIST_VERSION https://github.com/gristlabs/grist-core.git
+
+################################################################################
 ## Javascript build stage
 ################################################################################
 
@@ -14,7 +27,7 @@ FROM node:22.14.0-alpine3.21 AS builder
 
 # Install all node dependencies.
 WORKDIR /grist
-COPY package.json yarn.lock /grist/
+COPY --from=sources /grist-core/package.json /grist-core/yarn.lock /grist/
 # Create node_modules with devDependencies to be able to build the app
 # Add at global level gyp deps to build sqlite3 for prod
 # then create node_modules_prod that will be the node_modules of final image
@@ -32,16 +45,16 @@ RUN \
  { if [ -e package.json ] ; then yarn install --frozen-lockfile --modules-folder=/node_modules --verbose --network-timeout 600000 ; fi }
 
 # Build node code.
-COPY tsconfig.json /grist
-COPY tsconfig-ext.json /grist
-COPY tsconfig-prod.json /grist
-COPY test/tsconfig.json /grist/test/tsconfig.json
-COPY test/chai-as-promised.js /grist/test/chai-as-promised.js
-COPY app /grist/app
-COPY stubs /grist/stubs
-COPY buildtools /grist/buildtools
+COPY --from=sources /grist-core/tsconfig.json /grist
+COPY --from=sources /grist-core/tsconfig-ext.json /grist
+COPY --from=sources /grist-core/tsconfig-prod.json /grist
+COPY --from=sources /grist-core/test/tsconfig.json /grist/test/tsconfig.json
+COPY --from=sources /grist-core/test/chai-as-promised.js /grist/test/chai-as-promised.js
+COPY --from=sources /grist-core/app /grist/app
+COPY --from=sources /grist-core/stubs /grist/stubs
+COPY --from=sources /grist-core/buildtools /grist/buildtools
 # Copy locales files early. During build process they are validated.
-COPY static/locales /grist/static/locales
+COPY --from=sources /grist-core/static/locales /grist/static/locales
 
 # Add bash needed by build:prod
 RUN \
@@ -57,7 +70,7 @@ RUN \
 
 # Fetch python3.11
 FROM python:3.11.11-alpine3.21 AS collector-py3
-COPY sandbox/requirements3.txt requirements3.txt
+COPY --from=sources sandbox/requirements3.txt requirements3.txt
 RUN \
   pip3 install --no-cache-dir pip==25.0.1 setuptools==75.8.1 && \
   pip3 install --no-cache-dir -r requirements3.txt
@@ -117,11 +130,11 @@ RUN \
 COPY --from=sandbox /runsc /usr/bin/runsc
 
 # Add files needed for running server.
-COPY package.json /grist/package.json
-COPY bower_components /grist/bower_components
-COPY sandbox /grist/sandbox
-COPY plugins /grist/plugins
-COPY static /grist/static
+COPY --from=sources /grist-core/package.json /grist/package.json
+COPY --from=sources /grist-core/bower_components /grist/bower_components
+COPY --from=sources /grist-core/sandbox /grist/sandbox
+COPY --from=sources /grist-core/plugins /grist/plugins
+COPY --from=sources /grist-core/static /grist/static
 
 # Finalize static directory
 RUN \
