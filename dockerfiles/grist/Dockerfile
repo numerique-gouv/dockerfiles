@@ -18,7 +18,7 @@ ARG GRIST_VERSION
 # Clone grist from GRIST_VERSION tag
 WORKDIR /grist-core
 RUN \
-  git clone --depth 1 -b v$GRIST_VERSION https://github.com/gristlabs/grist-core.git && \
+  git clone --depth 1 -b v$GRIST_VERSION https://github.com/gristlabs/grist-core.git . &&\
   # Next two lines can be safely removed after 1.4.3 release
   # where tsconfig-prod will be merged in grist-core:main
   sed -i '/.*test*/d' tsconfig.json && \
@@ -39,7 +39,7 @@ COPY --from=sources /grist-core/package.json /grist-core/yarn.lock /grist/
 RUN \
   yarn install --frozen-lockfile --verbose --network-timeout 600000 && \
   yarn global add --verbose --network-timeout 600000 node-gyp node-pre-gyp node-gyp-build node-gyp-build-optional-packages && \
-  yarn install --prod --frozen-lockfile --modules-folder=node_modules_prod --verbose --network-timeout 600000
+  yarn install --prod --frozen-lockfile --modules-folder=/node_modules_prod --verbose --network-timeout 600000
 
 # Install any extra node dependencies (at root level, to avoid having to wrestle
 # with merging them).
@@ -75,7 +75,7 @@ RUN \
 
 # Fetch python3.11
 FROM python:3.11.11-alpine3.21 AS collector-py3
-COPY --from=sources sandbox/requirements3.txt requirements3.txt
+COPY --from=sources /grist-core/sandbox/requirements3.txt requirements3.txt
 RUN \
   pip3 install --no-cache-dir pip==25.0.1 setuptools==75.8.1 && \
   pip3 install --no-cache-dir -r requirements3.txt
