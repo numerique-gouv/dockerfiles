@@ -181,7 +181,7 @@ WORKDIR /grist
 # development.
 #
 ENV \
-  PYTHON_VERSION_ON_CREATION=3 \
+  PYTHON_VERSION=3 \
   GRIST_ORG_IN_PATH=true \
   GRIST_HOST=0.0.0.0 \
   GRIST_SINGLE_PORT=true \
