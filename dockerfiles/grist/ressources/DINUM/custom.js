@@ -40,7 +40,7 @@
       timeZone: 'Europe/Paris',
     });
 
-    const contactMail = "contact@grist.numerique.gouv.fr"
+    const contactMail = "grist@numerique.gouv.fr"
 
     dialog.innerHTML = `
         <p>
