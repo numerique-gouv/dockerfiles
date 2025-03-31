@@ -18,11 +18,7 @@ ARG GRIST_VERSION
 # Clone grist from GRIST_VERSION tag
 WORKDIR /grist-core
 RUN \
-  git clone --depth 1 -b v$GRIST_VERSION https://github.com/gristlabs/grist-core.git . &&\
-  # Next two lines can be safely removed after 1.4.3 release
-  # where tsconfig-prod will be merged in grist-core:main
-  sed -i '/.*test*/d' tsconfig.json && \
-  cp tsconfig.json tsconfig-prod.json
+  git clone --depth 1 -b v$GRIST_VERSION https://github.com/gristlabs/grist-core.git
 
 ################################################################################
 ## Javascript build stage
