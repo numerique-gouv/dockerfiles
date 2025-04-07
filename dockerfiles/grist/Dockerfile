@@ -29,6 +29,13 @@ FROM node:22.14.0-alpine3.21 AS builder
 # Install all node dependencies.
 WORKDIR /grist
 COPY --from=sources /grist-core/package.json /grist-core/yarn.lock /grist/
+
+# Add python and build tools needed by gyp compilation in node modules
+RUN \
+  apk update && \
+  apk add --no-cache python3=3.12.9-r0 build-base=0.5-r3  && \
+  ln -sf python3 /usr/bin/python
+
 # Create node_modules with devDependencies to be able to build the app
 # Add at global level gyp deps to build sqlite3 for prod
 # then create node_modules_prod that will be the node_modules of final image
