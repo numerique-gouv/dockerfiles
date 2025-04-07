@@ -63,9 +63,10 @@ COPY --from=sources /grist-core/buildtools /grist/buildtools
 COPY --from=sources /grist-core/static/locales /grist/static/locales
 
 # Add bash needed by build:prod
+# And then build prod
 RUN \
   apk update && \
-  apk --no-cache add bash=5.2.37-r0 && \
+  apk add --no-cache bash=5.2.37-r0 && \
   yarn run build:prod && \
 # We don't need them anymore, they will by copied to the final image.
   rm -rf /grist/static/locales
