@@ -18,7 +18,7 @@ ARG GRIST_VERSION
 # Clone grist from GRIST_VERSION tag
 WORKDIR /grist-core
 RUN \
-  git clone --depth 1 -b v$GRIST_VERSION https://github.com/gristlabs/grist-core.git
+  git clone --depth 1 -b v$GRIST_VERSION https://github.com/gristlabs/grist-core.git .
 
 ################################################################################
 ## Javascript build stage
