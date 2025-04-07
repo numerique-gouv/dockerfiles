@@ -56,8 +56,6 @@ RUN \
 COPY --from=sources /grist-core/tsconfig.json /grist
 COPY --from=sources /grist-core/tsconfig-ext.json /grist
 COPY --from=sources /grist-core/tsconfig-prod.json /grist
-COPY --from=sources /grist-core/test/tsconfig.json /grist/test/tsconfig.json
-COPY --from=sources /grist-core/test/chai-as-promised.js /grist/test/chai-as-promised.js
 COPY --from=sources /grist-core/app /grist/app
 COPY --from=sources /grist-core/stubs /grist/stubs
 COPY --from=sources /grist-core/buildtools /grist/buildtools
