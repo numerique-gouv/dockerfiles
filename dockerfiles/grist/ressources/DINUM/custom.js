@@ -5,15 +5,15 @@
   // CONFIGURER ICI
   const config = {
     // CEST = heure d'été (+0200), CET = heure d'hiver (+0100).
-    selectedTz: 'CET',
+    selectedTz: 'CEST',
 
     // Date du début de la maintenance
-    startDateWithoutTimezone: '2025-01-15T18:00:00',
+    startDateWithoutTimezone: '2025-04-14T12:00:00',
 
     // Durée de la maitenance prévue (en minutes).
     // ASTUCE: Si la maintenance dure moins longtemps que prévu, réduire a postériori la valeur de cette variable de sorte à ce qu'elle n'apparaisse plus.
     // Pas besoin de committer ensuite le changement dans le repo.
-    maintainanceDurationMinutes: 60,
+    maintainanceDurationMinutes: 120,
   };
   // FIN CONFIGURER
 
