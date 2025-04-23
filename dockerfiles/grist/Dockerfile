@@ -86,19 +86,16 @@ RUN \
 ## Sandbox collection stage
 ################################################################################
 
-# Fetch gvisor-based sandbox. Note, to enable it to run within default
-# unprivileged docker, layers of protection that require privilege have
-# been stripped away, see https://github.com/google/gvisor/issues/4371
-# The standalone sandbox binary is built on buster, but remains compatible
-# with recent Debian.
-# If you'd like to use unmodified gvisor, you should be able to just drop
-# in the standard runsc binary and run the container with any extra permissions
-# it needs.
+# A recipe for building the gvisor runsc sandbox. Output is a single file.
 
 # This build stage is adapted from work done by @paulfitz
 # https://github.com/gristlabs/gvisor/commit/4208b8fe4e19bb7473cee8bec444c7cae6171d8b
-
-# A recipe for building the gvisor runsc sandbox. Output is a single file.
+# Note, to enable it to run within default
+# unprivileged docker, layers of protection that require privilege have
+# been stripped away, see https://github.com/google/gvisor/issues/4371
+# If you'd like to use unmodified gvisor, you should be able to just drop
+# in the standard runsc binary and run the container with any extra permissions
+# it needs.
 
 FROM golang:1.24.1 AS sanbox-builder
 
