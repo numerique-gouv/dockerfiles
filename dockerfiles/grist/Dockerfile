@@ -109,7 +109,7 @@ FROM node:22.14.0-alpine3.21
 # dirty symbolic link to follow docker_entrypoint.sh expectations
 RUN \
   apk update && \
-  apk --no-cache add bash=5.2.37-r0 curl=8.12.1-r1 libexpat=2.7.0-r0 procps-ng=4.0.4-r2 setpriv=2.40.4-r0 tini=0.19.0-r3 && \
+  apk --no-cache add bash=5.2.37-r0 curl=8.12.1-r1 libexpat=2.7.0-r0 procps-ng=4.0.4-r2 setpriv=2.40.4-r1 tini=0.19.0-r3 && \
   ln -s /sbin/tini /usr/bin/tini
 
 # Keep all storage user may want to persist in a distinct directory
