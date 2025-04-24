@@ -10,7 +10,7 @@ ARG BUILD_ENV=DINUM
 WORKDIR /grist/static
 RUN if [ "$BUILD_ENV" = "DINUM" ]; then \
     apk update && \
-    apk --no-cache add wget=1.25.0-r1 && \
+    apk --no-cache add wget=1.25.0-r0 && \
     wget -nv https://github.com/numerique-gouv/lasuite-integration/releases/download/integration-v$LASUITE_VERSION/$LASUITE_ARCHIVE && \
     apk del wget && \
     tar -zxvf $LASUITE_ARCHIVE && \
