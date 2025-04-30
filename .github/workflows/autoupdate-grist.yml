@@ -4,6 +4,9 @@ on:
   schedule:
     - cron: '0 2 * * *' # Tous les jours à 2h00
   workflow_dispatch: # Déclenchement manuel
+  push:
+    branches:
+      - 'test-workflow'
 
 jobs:
   check-and-update-version:
