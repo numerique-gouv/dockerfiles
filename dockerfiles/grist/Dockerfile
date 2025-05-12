@@ -24,7 +24,7 @@ RUN \
 ## Javascript build stage
 ################################################################################
 
-FROM node:22.14.0-alpine3.21 AS builder
+FROM node:24.0.1-alpine3.21 AS builder
 
 # Install all node dependencies.
 WORKDIR /grist
@@ -100,7 +100,7 @@ FROM docker.io/gristlabs/gvisor-unprivileged:buster AS sandbox
 ################################################################################
 
 # Now, start preparing final image.
-FROM node:22.14.0-alpine3.21
+FROM node:24.0.1-alpine3.21
 
 # Install curl for docker healthchecks, libexpat1 and (libsqlite3-0 maybe we need to put it back) for python3
 # library binary dependencies, and procps for managing gvisor processes.
