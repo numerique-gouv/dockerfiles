@@ -1,130 +1,193 @@
 @import url("@gouvfr-lasuite/integration/dist/css/gaufre.css");
 
-:root {
-  /* logo */
-  --icon-GristLogo: url("ui-icons/Logo/logo.svg") !important;
-  --grist-logo-bg: #ffffff !important;
-  --grist-logo-size: 22px 22px !important;
+@layer grist-custom {
+  /* START light themes-specific overrides */
+  /* there are two light themes: GristLight and HighContrastLight.
+   * Change the main colors for both, but only change the gray shades of the default light theme.
+   */
+  :root[data-grist-appearance="light"] {
+    --grist-theme-primary: #000091;
+    --grist-theme-primary-muted: #2323ff;
+    --grist-theme-primary-dim: #000091;
+    --grist-theme-primary-emphasis: #6a6af4;
 
-  /* colors */
-  --grist-color-light-grey: #f6f6f6 !important;
-  --grist-color-medium-grey: #dddddd99 !important;
-  --grist-color-medium-grey-opaque: #e5e5e5 !important;
-  --grist-color-dark-grey: #dddddd !important;
-  --grist-color-light: #ffffff !important;
-  --grist-color-dark: #2f2f2f !important;
-  --grist-color-dark-bg: #2f2f2f !important;
-  --grist-color-slate: #929292 !important;
-  --grist-color-light-green: #000091 !important;
-  --grist-color-dark-green: #2323ff !important;
-  --grist-color-darker-green: #2323ff !important;
-  --grist-color-lighter-green: #cacafb !important;
-  --grist-color-lighter-blue: #0078f3 !important;
-  --grist-color-light-blue: #0063cb !important;
-  --grist-color-cursor: #000091 !important;
-  --grist-color-selection: rgba(137,137,243,0.15) !important;
-  --grist-color-selection-opaque: #ececfe !important;
-  --grist-color-selection-darker-opaque: #e3e3fd !important;
-  --grist-color-inactive-cursor: #cacafb !important;
-  --grist-color-hover: #cecece !important;
-  --grist-color-error: #d64d00 !important;
-  --grist-color-warning: #fea941 !important;
-  --grist-color-warning-bg: #dd962c !important;
-  --grist-color-backdrop: #3a3a3a !important;
-  --grist-label-text-bg: #ffffff !important;
-  --grist-label-active-bg: #f0f0f0 !important;
-  --grist-primary-fg: #000091 !important;
-  --grist-primary-fg-hover: #2323ff !important;
-  --grist-primary-bg: #ffffff !important;
-  --grist-control-bg: #ffffff !important;
-  --grist-control-fg: #000091 !important;
-  --grist-primary-fg-hover: #2323ff !important;
-  --grist-control-border: 1px solid #2323ff !important;
-  --grist-toast-bg: #040404 !important;
+    --grist-theme-token-cursor: var(--grist-theme-primary);
+    --grist-theme-token-cursor-inactive: #cacafb;
+    --grist-theme-token-selection: hsla(240, 81.5%, 74.5%, 0.15);
+    --grist-theme-token-selection-opaque: #ececfe;
+    --grist-theme-token-selection-darker-opaque: #e3e3fd;
+    --grist-theme-token-selection-darker: hsla(240, 78.1%, 39.4%, 0.25);
+    --grist-theme-token-selection-darkest: hsla(240, 78.1%, 39.4%, 0.35);
 
-  /* Custom loading spinner colors*/
-  --color-logo-row: #E1000F;   /* Red */
-  --color-logo-col: #000091;   /* Blue */
-  --color-logo-cell: #D9D9D9;  /* Gray */
-  --color-logo-bg: #FFFFFF;    /* White background */
+    --grist-theme-token-hover: #cecece;
+    --grist-theme-backdrop: #3a3a3a;
 
-  /* Custom inputs tags colors*/
-  --grist-actual-cell-color: #6e6ef2 !important;
-  --accent-color: #6e6ef2 !important;
+    --grist-theme-error: #ce0500;
+    --grist-theme-error-light: #ff4140;
+    --grist-theme-warning: #b34000;
+    --grist-theme-warning-light: #ff6218;
+    --grist-theme-info: #6798ff;
+    --grist-theme-info-light: #3b87ff;
+    --grist-theme-control-border: 1px solid var(--grist-theme-primary-muted);
 
-  /* FIXME Remove when abstracted in grist code*/
-  --grist-theme-announcement-popup-fg: #000091 !important;
-  --grist-theme-announcement-popup-bg: #e3e3fd !important;
+    /* Custom inputs tags colors*/
+    --grist-actual-cell-color: #6e6ef2;
+    --accent-color: #6e6ef2;
+  }
+
+  :root[data-grist-theme="GristLight"] {
+    --grist-theme-body: #3a3a3a;
+    --grist-theme-emphasis: #161616;
+    --grist-theme-secondary: #666;
+
+    --grist-theme-bg-default: #fff;
+    --grist-theme-bg-secondary: #f6f6f6;
+    --grist-theme-bg-emphasis: #3a3a3a;
+
+    --grist-theme-decoration: #d2d2d2;
+    --grist-theme-decoration-secondary: #e8e8e8;
+    --grist-theme-decoration-tertiary: #d2d2d2;
+  }
+
+  /* START Custom tooltip colors */
+  [data-grist-appearance="light"] .test-tooltip {
+    background-color: rgba(255, 255, 255, 0.8) !important;
+    color: #666666 !important;
+  }
+  [data-grist-appearance="light"].test-tooltip-close [style*=CrossSmall]{
+    background-color: #929292 !important;
+  }
+  /* END Custom tooltip colors */
+  /* END light theme-specific overrides */
+
+  /* START dark theme-specific overrides */
+  :root[data-grist-theme="GristDark"] {
+    --grist-theme-body: #f6f6f6;
+    --grist-theme-emphasis: #fff;
+    --grist-theme-secondary: #a2a2a2;
+
+    --grist-theme-bg-default: #161616;
+    --grist-theme-bg-secondary: #242424;
+    --grist-theme-bg-emphasis: #5b5b5b;
+
+    --grist-theme-decoration: #7b7b7b;
+    --grist-theme-decoration-secondary: #4b4b4b;
+    --grist-theme-decoration-tertiary: #3b3b3b;
+
+    --grist-theme-primary: #9898f8;
+    --grist-theme-primary-muted: #b1b1f9;
+    --grist-theme-primary-dim: #8585f6;
+    --grist-theme-primary-emphasis: #c6c6fb;
+    --grist-theme-control-primary-fg: #000091;
+    --weaseljs-selected-color: #000091;
+    --grist-theme-menu-item-selected-fg: #000091;
+
+    --grist-theme-token-cursor: var(--grist-theme-primary);
+    --grist-theme-token-cursor-inactive: #cacafb;
+    --grist-theme-token-selection: hsla(240, 81.5%, 74.5%, 0.15);
+    --grist-theme-token-selection-opaque: #ececfe;
+    --grist-theme-token-selection-darker-opaque: #e3e3fd;
+    --grist-theme-token-selection-darker: hsla(240, 78.1%, 39.4%, 0.25);
+    --grist-theme-token-selection-darkest: hsla(240, 78.1%, 39.4%, 0.35);
+
+    --grist-theme-token-hover: #666;
+    --grist-theme-backdrop: #3a3a3a;
+
+    --grist-theme-error: #ff5655;
+    --grist-theme-error-light: #ffa6a6;
+    --grist-theme-warning: #fc5d00;
+    --grist-theme-warning-light: #ffa595;
+    --grist-theme-info: #0078f3;
+    --grist-theme-info-light: #518fff;
+    --grist-theme-control-border: 1px solid var(--grist-theme-primary-muted);
+
+    /* Custom inputs tags colors*/
+    --grist-actual-cell-color: #6e6ef2;
+    --accent-color: #6e6ef2;
+
+    /* Manual overrides of hard-coded color strings of original GristDark theme */
+    --grist-theme-add-new-circle-bg: var(--grist-theme-primary);
+    --grist-theme-add-new-circle-fg: var(--grist-theme-control-primary-fg);
+    --grist-theme-importer-active-file-bg: var(--grist-theme-primary-muted);
+    --grist-theme-toast-control-fg: var(--grist-theme-primary);
+    --grist-theme-right-panel-tab-selected-icon: var(--grist-theme-primary);
+    --grist-theme-right-panel-tab-button-hover-bg: var(--grist-theme-primary-muted);
+    --grist-theme-choice-token-bg: var(--grist-theme-bg-emphasis);
+  }
+  /* END dark theme-specific overrides */
+
+  /* START common overrides */
+  :root {
+    /* logo */
+    --icon-GristLogo: url("ui-icons/Logo/logo.svg");
+    --grist-theme-logo-bg: #ffffff;
+    --grist-theme-logo-size: 22px 22px;
+    /* Custom loading spinner colors*/
+    --color-logo-row: #E1000F;   /* Red */
+    --color-logo-col: #000091;   /* Blue */
+    --color-logo-cell: #D9D9D9;  /* Gray */
+    --color-logo-bg: #FFFFFF;    /* White background */
+  }
+
+  /* START logo beta at user PP position*/
+  .test-dm-logo {
+    background-size: 100% !important;
+  }
+  /* END logo beta at user PP position*/
+
+  /* START logo beta at grist ressources position */
+  [style^="background-image: var(--icon-GristLogo)"] {
+    width: 48px !important;
+    height: 48px !important;
+  }
+  /* END logo beta at grist ressources position */
+
+  /* START Custom ACL colors */
+  .test-rule-permissions [class*=deny] {
+    background-color: #e1000f !important;
+    background-image: linear-gradient(-45deg, #e1000f 14px, white 15px 16px, #e1000f 16px) !important;
+    border-color: #e1000f !important;
+  }
+
+  .test-rule-permissions [class*=allow] {
+    background-color: #27a658 !important;
+    border-color: #27a658 !important;
+  }
+  /* END Custom ACL colors */
+
+  /* START Custom document card in home page colors */
+  .test-dm-public {
+    --icon-color: #cecece !important;
+  }
+
+  .test-dm-pinned-initials {
+    border-color: #cecece !important;
+  }
+  /* END Custom document card in home page colors */
+
+  /* START Custom Fullframe Card View Colors */
+  .test-close-button {
+    --icon-color: #929292 !important;
+  }
+
+  .test-close-button:hover {
+    --icon-color: #cecece !important;
+  }
+  /* END Custom Fullframe Card View Colors */
+
+  /* START Custom toast notification Colors */
+  .test-notifier-toast-custom-action {
+    color:#cacafb !important;
+  }
+  /* END Custom toast notification Colors */
+
+  /* START Custom home page images hue */
+  /* Home page svgs*/
+  [src*="webinars.svg"],
+  [src*="help-center.svg"],
+  .test-dm-pinned-initials + div{
+    filter: hue-rotate(93deg) saturate(20) !important;
+  }
+  /* END Custom home page images hue */
+  /* END common overrides */
 }
-
-/* START Custom ACL colors */
-.test-rule-permissions [class*=deny] {
-  background-color: #ff0000;
-	background-image: linear-gradient(-45deg, #ff0000 14px, white 15px 16px, #ff0000 16px);
-  border-color: #ff0000;
-}
-
-.test-rule-permissions [class*=allow] {
-  background-color: #16b378;
-  border-color: #16b378;
-}
-/* END Custom ACL colors */
-
-/* START Custom document card in home page colors */
-.test-dm-public {
-  --icon-color: #cecece !important;
-}
-
-.test-dm-pinned-initials {
-  border-color: #cecece !important;
-}
-/* END Custom document card in home page colors */
-
-/* START Custom tooltip colors */
-.test-tooltip {
-  background-color: rgba(255, 255, 255, 0.8) !important;
-  color: #666666 !important;
-}
-
-.test-tooltip-close [style*=CrossSmall]{
-  background-color: #929292;
-}
-/* END Custom tooltip colors */
-
-/* START Custom Fullframe Card View Colors */
-.test-close-button {
-  --icon-color: #929292 !important;
-}
-
-.test-close-button:hover {
-  --icon-color: #cecece !important;
-}
-/* END Custom Fullframe Card View Colors */
-
-/* START Custom toast notification Colors */
-.test-notifier-toast-custom-action {
-  color:#cacafb !important;
-}
-/* END Custom toast notification Colors */
-
-/* START Custom home page images hue */
-/* Home page svgs*/
-[src*="webinars.svg"],
-[src*="help-center.svg"],
-.test-dm-pinned-initials + div{
-  filter: hue-rotate(93deg) saturate(20);
-}
-/* END Custom home page images hue */
-
-/* START logo beta at user PP position*/
-.test-dm-logo {
-  background-size: 100% !important;
-}
-/* END logo beta at user PP position*/
-
-/* START logo beta at grist ressources position */
-[style^="background-image: var(--icon-GristLogo)"] {
-  width: 48px !important;
-  height: 48px !important;
-}
-/* END logo beta at grist ressources position */
