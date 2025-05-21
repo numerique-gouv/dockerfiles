@@ -42,6 +42,12 @@
   --grist-control-border: 1px solid #2323ff !important;
   --grist-toast-bg: #040404 !important;
 
+  /* Custom loading spinner colors*/
+  --color-logo-row: #E30613;   /* Red */
+  --color-logo-col: #001BA6;   /* Blue */
+  --color-logo-cell: #C6C6C6;  /* Gray */
+  --color-logo-bg: #FFFFFF;    /* White background */
+
   /* Custom inputs tags colors*/
   --grist-actual-cell-color: #6e6ef2 !important;
   --accent-color: #6e6ef2 !important;
