@@ -6,6 +6,8 @@
    * Change the main colors for both, but only change the gray shades of the default light theme.
    */
   :root[data-grist-appearance="light"] {
+    --grist-theme-bg-color: #fff;
+
     --grist-theme-primary: #000091;
     --grist-theme-primary-muted: #2323ff;
     --grist-theme-primary-dim: #000091;
@@ -66,6 +68,8 @@
     --grist-theme-emphasis: #fff;
     --grist-theme-secondary: #a2a2a2;
 
+    --grist-theme-bg: #161616;
+    --grist-theme-bg-color: #161616;
     --grist-theme-bg-default: #161616;
     --grist-theme-bg-secondary: #242424;
     --grist-theme-bg-emphasis: #5b5b5b;
@@ -122,12 +126,25 @@
     --icon-GristLogo: url("ui-icons/Logo/logo.svg");
     --grist-theme-logo-bg: #ffffff;
     --grist-theme-logo-size: 22px 22px;
-    /* Custom loading spinner colors*/
+    --color-logo-bg: var(--grist-theme-bg);
+  }
+
+  /* START loading screen logo */
+  .grist-logo {
     --color-logo-row: #E1000F;   /* Red */
     --color-logo-col: #000091;   /* Blue */
     --color-logo-cell: #D9D9D9;  /* Gray */
-    --color-logo-bg: #FFFFFF;    /* White background */
+    background: #fff !important;
+    border-radius: 22px !important;
+    padding: 20px 24px !important;
+    border: 1px solid #ccc !important;
   }
+  /* fix vertical centering that is a bit off */
+  .grist-logo > * {
+    position: relative !important;
+    top: 4px !important;
+  }
+  /* END loading screen logo */
 
   /* START logo beta at user PP position*/
   .test-dm-logo {
