@@ -4,7 +4,7 @@ on:
   workflow_dispatch:
     inputs:
       gristVersion:
-        description: 'Grist base image'
+        description: 'Grist git version'
         required: true
       imageTag:
         description: 'lasuite/grist docker image tag'
@@ -19,6 +19,8 @@ on:
       commitSha:
         description: 'Git commit sha to build the image'
         required: true
+  schedule:
+    - cron: 0 22 * * *
 
 env:
   DOCKER_USER: 1001:127
@@ -41,7 +43,7 @@ jobs:
         with:
           submodules: recursive
           token: ${{ steps.app-token.outputs.token }}
-          ref: ${{ github.event.inputs.commitSha }}
+          ref: ${{ github.event.inputs.commitSha || 'main' }}
       -
         name: Load sops secrets
         uses: rouja/actions-sops@main
@@ -56,8 +58,8 @@ jobs:
         name: Build and push
         run: |
           cd dockerfiles/grist;
-          docker build --build-arg "GRIST_VERSION=${{ github.event.inputs.gristVersion }}" \
-          --build-arg "BUILD_ENV=${{ github.event.inputs.imageVersion }}" \
-          --annotation "commitSha=${{ github.event.inputs.commitSha }}" \
+          docker build --build-arg "GRIST_VERSION=${{ github.event.inputs.gristVersion || 'latest' }}" \
+          --build-arg "BUILD_ENV=${{ github.event.inputs.imageVersion || 'DINUM' }}" \
+          --annotation "commitSha=${{ github.event.inputs.commitSha || 'main' }}" \
           --file Dockerfile.custom \
-          --push . -t lasuite/grist:${{ github.event.inputs.imageTag }}-${{ github.event.inputs.imageVersion }};
+          --push . -t lasuite/grist:${{ github.event.inputs.imageTag || 'latest' }}-${{ github.event.inputs.imageVersion || 'DINUM' }};
