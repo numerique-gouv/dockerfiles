@@ -1,4 +1,4 @@
-ARG GRIST_VERSION=v1.5.2
+ARG GRIST_VERSION=1.6.0
 
 FROM lasuite/grist:$GRIST_VERSION
 
@@ -9,8 +9,7 @@ ARG BUILD_ENV=DINUM
 # La suite's gauffre is expected only in DINUM image
 WORKDIR /grist/static
 RUN if [ "$BUILD_ENV" = "DINUM" ]; then \
-    apk update && \
-    apk --no-cache add wget=1.25.0-r0 && \
+    apk --no-cache add wget && \
     wget -nv https://github.com/numerique-gouv/lasuite-integration/releases/download/integration-v$LASUITE_VERSION/$LASUITE_ARCHIVE && \
     apk del wget && \
     tar -zxvf $LASUITE_ARCHIVE && \
@@ -29,5 +28,5 @@ COPY ressources/$BUILD_ENV/ /grist/static/
 WORKDIR /grist
 
 # Variable to force grist to use custom.css and custom.js
-ENV APP_STATIC_INCLUDE_CUSTOM_CSS true
-ENV GRIST_INCLUDE_CUSTOM_SCRIPT_URL /v/unknown/custom.js
+ENV APP_STATIC_INCLUDE_CUSTOM_CSS=true
+ENV GRIST_INCLUDE_CUSTOM_SCRIPT_URL=/v/unknown/custom.js

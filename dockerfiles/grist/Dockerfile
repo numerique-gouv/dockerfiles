@@ -1,4 +1,4 @@
-ARG GRIST_VERSION=v1.5.2
+ARG GRIST_VERSION=1.6.0
 
 ################################################################################
 ## The Grist source can be extended. This is a stub that can be overridden
@@ -32,8 +32,7 @@ COPY --from=sources /grist-core/package.json /grist-core/yarn.lock /grist/
 
 # Add python and build tools needed by gyp compilation in node modules
 RUN \
-  apk update && \
-  apk add --no-cache python3=3.12.10-r0 build-base=0.5-r3
+  apk add --no-cache python3 build-base
 
 # Create node_modules with devDependencies to be able to build the app
 # Add at global level gyp deps to build sqlite3 for prod
@@ -64,8 +63,7 @@ COPY --from=sources /grist-core/static/locales /grist/static/locales
 # Add bash needed by build:prod
 # And then build prod
 RUN \
-  apk update && \
-  apk add --no-cache bash=5.2.37-r0 && \
+  apk add --no-cache bash && \
   yarn run build:prod && \
 # We don't need them anymore, they will by copied to the final image.
   rm -rf /grist/static/locales
@@ -108,8 +106,7 @@ FROM node:22.14.0-alpine3.21
 # setpriv is used in docker_entrypoint.sh
 # dirty symbolic link to follow docker_entrypoint.sh expectations
 RUN \
-  apk update && \
-  apk --no-cache add bash=5.2.37-r0 curl=8.12.1-r1 libexpat=2.7.0-r0 procps-ng=4.0.4-r2 setpriv=2.40.4-r1 tini=0.19.0-r3 && \
+  apk --no-cache add bash curl libexpat procps-ng setpriv tini && \
   ln -s /sbin/tini /usr/bin/tini
 
 # Keep all storage user may want to persist in a distinct directory
