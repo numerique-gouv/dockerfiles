@@ -98,7 +98,7 @@ FROM docker.io/gristlabs/gvisor-unprivileged:buster AS sandbox
 ################################################################################
 
 # Now, start preparing final image.
-FROM node:22.14.0-alpine3.21
+FROM alpine:3.21.3
 
 # Install curl for docker healthchecks, libexpat1 and (libsqlite3-0 maybe we need to put it back) for python3
 # library binary dependencies, and procps for managing gvisor processes.
@@ -106,7 +106,7 @@ FROM node:22.14.0-alpine3.21
 # setpriv is used in docker_entrypoint.sh
 # dirty symbolic link to follow docker_entrypoint.sh expectations
 RUN \
-  apk --no-cache add bash curl libexpat procps-ng setpriv tini && \
+  apk --no-cache add bash curl libexpat nodejs procps-ng setpriv tini && \
   ln -s /sbin/tini /usr/bin/tini
 
 # Keep all storage user may want to persist in a distinct directory
