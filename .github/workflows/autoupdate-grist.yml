@@ -19,8 +19,11 @@ jobs:
           latest_release=$(curl -s https://api.github.com/repos/gristlabs/grist-core/releases/latest | jq -r .name)
           # See https://www.gnu.org/software/bash/manual/html_node/Shell-Parameter-Expansion.html
           normalized_latest_release=${latest_release/#v/}
-
+          # Get tarball of latest version and its checksum
+          wget https://github.com/gristlabs/grist-core/archive/refs/tags/${latest_release}.tar.gz || exit 1
+          checksum="sha256:$(shasum -a 256 $latest_release.tar.gz)"
           sed -i "s/ARG GRIST_VERSION=.*/ARG GRIST_VERSION=${normalized_latest_release}/" dockerfiles/grist/Dockerfile{,.custom}
+          sed -i "s/ARG GRIST_CORE_CHECKSUM=.*/ARG GRIST_CORE_CHECKSUM=${checksum}/" dockerfiles/grist/Dockerfile{,.custom}
           echo "title=⬆️(grist): bump image to ${normalized_latest_release}" >> $GITHUB_OUTPUT
           echo "body=See the release notes there: https://github.com/gristlabs/grist-core/releases/tag/${latest_release}" >> $GITHUB_OUTPUT
 
