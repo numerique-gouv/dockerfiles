@@ -1,4 +1,9 @@
+# This variables must be changed at each official releases
+# For now checksum is obtained by performing
+# `shasum -a 256 ${Archive}` locally
+# Could be great to add checksum with releases in gristlabs/grist-core
 ARG GRIST_VERSION=1.6.0
+ARG GRIST_CORE_CHECKSUM="sha256:67140074582bcff4449521404df37f4fc4e75ec386b1828d9f2f4325b779e4af"
 
 ################################################################################
 ## The Grist source can be extended. This is a stub that can be overridden
@@ -11,14 +16,16 @@ FROM scratch AS ext
 ################################################################################
 # Get sources from git stage
 ################################################################################
-FROM alpine/git:v2.47.2 AS sources
+FROM alpine:3.21.3 AS sources
 
 ARG GRIST_VERSION
-
-# Clone grist from GRIST_VERSION tag
-WORKDIR /grist-core
+ARG GRIST_CORE_CHECKSUM
+# Get archive of GRIST_VERSION from official repository
+# And verify that the checksum is the same at each build
+ADD --checksum=${GRIST_CORE_CHECKSUM} https://github.com/gristlabs/grist-core/archive/refs/tags/v${GRIST_VERSION}.tar.gz /
+# Uncompress archive and move result as grist-core
 RUN \
-  git clone --depth 1 -b v$GRIST_VERSION https://github.com/gristlabs/grist-core.git .
+tar -xf /v${GRIST_VERSION}.tar.gz && mv /grist-core-${GRIST_VERSION} /grist-core
 
 ################################################################################
 ## Javascript build stage
