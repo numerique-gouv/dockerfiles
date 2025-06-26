@@ -74,10 +74,10 @@ RUN \
 
 # Fetch python3.11
 FROM python:3.11.11-alpine3.21 AS collector-py3
-COPY --from=sources /grist-core/sandbox/requirements3.txt requirements3.txt
+COPY --from=sources /grist-core/sandbox/requirements.txt requirements.txt
 RUN \
   pip3 install --no-cache-dir pip==25.0.1 setuptools==75.8.1 && \
-  pip3 install --no-cache-dir -r requirements3.txt
+  pip3 install --no-cache-dir -r requirements.txt
 
 ################################################################################
 ## Sandbox collection stage
