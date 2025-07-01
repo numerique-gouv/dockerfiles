@@ -105,8 +105,10 @@ FROM alpine:3.21.3
 # Bash to run image entrypoint
 # setpriv is used in docker_entrypoint.sh
 # dirty symbolic link to follow docker_entrypoint.sh expectations
+# NOTE: icu-data-full is required for Intl API (Internationalization) support in NodeJS.
+# Otherwise the API only supports en-US format.
 RUN \
-  apk --no-cache add bash curl libexpat nodejs procps-ng setpriv tini && \
+  apk --no-cache add bash curl libexpat nodejs icu-data-full procps-ng setpriv tini && \
   ln -s /sbin/tini /usr/bin/tini
 
 # Keep all storage user may want to persist in a distinct directory
