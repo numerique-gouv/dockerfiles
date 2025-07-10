@@ -33,6 +33,10 @@ jobs:
             image: lasuite/grist
             path: dockerfiles/grist
             cmd_version: "grep -Po \"GRIST_\\KVERSION=.*\" dockerfiles/grist/Dockerfile | head -n 1 >> $GITHUB_ENV"
+          - dockerfile: dockerfiles/celery-exporter/Dockerfile
+            image: lasuite/celery-exporter
+            path: dockerfiles/celery-exporter
+            cmd_version: "echo \"VERSION=$(head -n1 dockerfiles/celery-exporter/Dockerfile | grep -oP ':\\K[^ ]+')\" >> $GITHUB_ENV"
     steps:
       -
         uses: actions/create-github-app-token@v1
