@@ -37,6 +37,10 @@ jobs:
             image: lasuite/celery-exporter
             path: dockerfiles/celery-exporter
             cmd_version: "echo \"VERSION=$(head -n1 dockerfiles/celery-exporter/Dockerfile | grep -oP ':\\K[^ ]+')\" >> $GITHUB_ENV"
+          - dockerfile: dockerfiles/livekit-sip/Dockerfile
+            image: lasuite/livekit-sip
+            path: dockerfiles/livekit-sip
+            cmd_version: "echo \"VERSION=$(grep 'git checkout tags/' dockerfiles/livekit-sip/Dockerfile | sed 's/.*tags\\/\\(v[0-9.]*\\).*/\\1/')\" >> $GITHUB_ENV"
     steps:
       -
         uses: actions/create-github-app-token@v1
