@@ -41,6 +41,10 @@ jobs:
             image: lasuite/livekit-sip
             path: dockerfiles/livekit-sip
             cmd_version: "echo \"VERSION=$(grep 'git checkout tags/' dockerfiles/livekit-sip/Dockerfile | sed 's/.*tags\\/\\(v[0-9.]*\\).*/\\1/')\" >> $GITHUB_ENV"
+          - dockerfile: dockerfiles/vaultwarden-api/Dockerfile
+            image: lasuite/vaultwarden-api
+            path: dockerfiles/vaultwarden-api
+            cmd_version: "echo \"VERSION=$(awk -F'=' '/^ENV BW_CLI_VERSION=/ {print $2}' dockerfiles/vaultwarden-api/Dockerfile)\" >> $GITHUB_ENV"
     steps:
       -
         uses: actions/create-github-app-token@v1
