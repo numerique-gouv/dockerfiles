@@ -28,7 +28,7 @@ jobs:
           - dockerfile: dockerfiles/keycloak-apps/Dockerfile
             image: lasuite/keycloak-apps
             path: dockerfiles/keycloak-apps
-            cmd_version: "echo \"$(cat dockerfiles/keycloak-apps/Dockerfile | head -n1 | cut -d' ' -f2)\" >> $GITHUB_ENV"
+            cmd_version: "echo \"VERSION=$(head -n1 dockerfiles/keycloak-apps/Dockerfile | grep -oP ':\\K[^ ]+')\" >> $GITHUB_ENV"
           - dockerfile: dockerfiles/celery-exporter/Dockerfile
             image: lasuite/celery-exporter
             path: dockerfiles/celery-exporter
