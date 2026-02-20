@@ -28,7 +28,8 @@ COPY --from=alpine-builder /app /app
 
 EXPOSE 9808
 
-RUN adduser --disabled-password --no-create-home exporter
+RUN adduser --disabled-password --no-create-home exporter; \
+  apt update && apt upgrade -y
 
 USER exporter
 
